@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 """Django's command-line utility for administrative tasks."""
+'''superuser = test_u pass=freee_kadai'''
 import os
 import sys
 
