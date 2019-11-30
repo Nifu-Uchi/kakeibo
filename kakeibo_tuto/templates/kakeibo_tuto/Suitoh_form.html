@@ -1,0 +1,27 @@
+
+
+{% extends 'kakeibo_tuto/base.html' %}
+{% load bootstrap %}
+{% block content %}
+
+  <!-- formタグを設定し、postメソッドを指定 -->
+  <form method="post">
+      <ol class="breadcrumb">
+       <li class="breadcrumb-item">
+         <a href="{% url 'kakeibo_tuto:Suitoh_list' %}">TOP</a>
+       </li>
+       <li class="breadcrumb-item active">追加</li>
+     </ol>
+      <!-- 新規データ登録フォームを表示 -->
+      {{ form|bootstrap }}
+      
+      <!-- データ保存ボタンを設定 -->
+       <button class="btn btn-primary">登録</button>
+
+       <!-- CSRF対策　-->
+      {% csrf_token %}
+
+      <!-- formタグを閉じる -->
+  </form>
+ <a class="btn" href="{% url 'kakeibo_tuto:Suitoh_list' %}" role="button">戻る</a>
+{% endblock %}

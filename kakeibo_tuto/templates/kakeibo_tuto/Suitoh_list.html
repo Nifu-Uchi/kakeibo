@@ -13,19 +13,21 @@
      <!--ページタイトル-->
      <div class="card mb-3">
        <div class="card-header">
-         <h3><b>家計簿アプリ</b></h3></div>
+         <h3><b>出納表</b></h3></div>
        <div class="card-body">
          <!-- テーブル表の定義 -->
          <div class="table-responsive">
-         <table width="100%" class="table table-striped table-bordered">
+         <table id=Suitoh width="100%" class="table table-striped table-bordered">
            　<!-- 表の列の定義-->
              <thead>
                <tr>
                  <th class="text-center">日付</th>
                  <th class="text-center">カテゴリ</th>
+                 <th class="text-center">名目</th>
                  <th class="text-center">金額</th>
-                 <th class="text-center">メモ</th>
                  <th class="text-center">重要度</th>
+                 <th class="text-center">修正</th>
+                 <th class="text-center">削除</th>
                </tr>
              </thead>
            　<!-- ここまでが表の列の定義-->
@@ -35,9 +37,13 @@
                  <tr class="odd gradeX text-center">
                    <td class="text-center" width="100">{{ item.data}}</td>
                    <td class="text-center" width="100">{{ item.cat}}</td>
-                   <td class="text-center" width="140">{{ item.out_cost}}</td>
                    <td class="text-center" width="140">{{ item.meimoku}}</td>
+                   <td class="text-center" width="140">{{ item.out_cost}}</td>
                     <td class="text-center" width="140">{{ item.rank}}</td>
+                   <td class="text-center" width="140"><a class="btn btn-primary"
+                        href="{% url 'kakeibo_tuto:Suitoh_update' item.pk %}">修正</a></td>
+                   <td class="text-center" width="140"><a class="btn btn-danger"
+                        href="{% url 'kakeibo_tuto:Suitoh_delete' item.pk %}">削除</a></td>
 
 
                  </tr>
@@ -46,9 +52,24 @@
            　<!-- ここまでが表のデータ部分の表示-->
            </table>
            <!-- ここまでがテーブル表の定義 -->
+
        </div>
       </div>
+
       </div>
+
+          <div class="card mb-3">
+       <div class="card-header">
+         <h3><b>機能</b></h3></div>
+       <div class="card-body">
+        <a class="btn" href="{% url 'kakeibo_tuto:Suitoh_list' %}" role="button">Link</a>
+       </div>
+       </div>
+      <a class="btn" href="{% url 'kakeibo_tuto:add' %}" role="button">新規登録</a>
+      </div>
+
+      </div>
+
    </div>
   </div>
 {% endblock content %}

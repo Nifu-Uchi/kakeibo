@@ -1,9 +1,8 @@
 from django.shortcuts import render
-
-# Create your views here.
-
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from .models import Category,Ranks,Suitoh
+from . forms import SuitohForm
+from django.urls import reverse_lazy
 
 class SuitohListView(ListView):
 
@@ -13,3 +12,39 @@ class SuitohListView(ListView):
     '''全取得'''
     def queryset(self):
         return Suitoh.objects.all()
+
+class SuitohCreateView(CreateView):
+
+    model = Suitoh
+
+    form_class = SuitohForm
+
+    success_url = reverse_lazy('kakeibo_tuto:create_done')
+
+
+def create_done(request):
+
+    return render(request,'kakeibo_tuto/create_done.html')
+
+
+
+class SuitohUpdateView(UpdateView):
+
+    model = Suitoh
+
+    form_class = SuitohForm
+
+    success_url = reverse_lazy('kakeibo_tuto:update_done')
+
+def update_done(request):
+
+    return render(request, 'kakeibo_tuto/create_done.html')
+
+class SuitohDeleteView(DeleteView):
+    model = Suitoh
+    success_url = reverse_lazy('kakeibo_tuto:delete_done')
+
+
+def delete_done(request):
+
+    return render(request, 'kakeibo_tuto/delete_done.html')
