@@ -1,0 +1,10 @@
+cd /Users/hiro.t/Documents/pem
+ssh -i "freee_kadai.pem" ubuntu@ec2-18-191-24-11.us-east-2.compute.amazonaws.com
+
+#接続後
+git fetch origin master
+git reset --hard origin/master
+
+18.191.24.11
+
+python3 manage.py runserver 0.0.0.0:8000
