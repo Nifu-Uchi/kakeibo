@@ -12,7 +12,10 @@ class SuitohListView(ListView):
     '''全取得'''
     def queryset(self):
         return Suitoh.objects.all()
-
+def test(request):
+    param = {'object_list':Suitoh.objects.all(),
+             'hello':'django',}
+    return render(request,'kakeibo_tuto/Suitoh_list.html',param)
 
 
 class SuitohCreateView(CreateView):

@@ -5,7 +5,7 @@ from . import views
 app_name = 'kakeibo_tuto'
 
 urlpatterns = [
-    path('Suitoh_list/', views.SuitohListView.as_view(), name='Suitoh_list'),
+    path('Suitoh_list/', views.test, name='Suitoh_list'),
     path('Suitoh_create/', views.SuitohCreateView.as_view(), name='add'),
     path('create_done/', views.create_done, name='create_done'),
     path('update/<int:pk>/', views.SuitohUpdateView.as_view(), name='Suitoh_update'),
