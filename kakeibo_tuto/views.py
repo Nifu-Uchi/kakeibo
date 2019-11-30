@@ -13,6 +13,8 @@ class SuitohListView(ListView):
     def queryset(self):
         return Suitoh.objects.all()
 
+
+
 class SuitohCreateView(CreateView):
 
     model = Suitoh

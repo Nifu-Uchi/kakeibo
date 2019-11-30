@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+#About
+課題として作成した家計簿アプリです。一時的に一般公開しています。
+
+開発言語・フレームワーク　-Python3 Django2 Bootstrap4
+デプロイ環境　-AWS EC2
+
+リンク
+課題用Webアプリ[http://18.191.24.11:8000/kakeibo_tuto/Suitoh_list/]
+
+
+kakeibo/kakeibo_tutoにアプリケーション構成ファイルがあります。
+
+
+#データテーブルについて　
+'suitoh'(models.Suitoh)
+構成カラム data,cat,out_cost,meimoku,rank
+          日付,カテゴリ,金額,名目,重要度
+＊cat,rankはそれぞれmodels.Ranks(高/中/低),.Categoryで定義されています。
+＊dateがdataになってしまっているのはtypoです。
+メインページ（/kakeibo_tuto/Suitoh_list/）に(views.SuitohListView)一覧表示されるようなっており、Listviewによって表示されています。
+データフレームで定義された5カラムの他に、修正・削除ボタン(後述)が実装されています。
+
+#機能一覧
+/views.py内にclassまたは関数として定義されています。
+Webページ上のリンクは/urls.py内の urlpatterns内で定義されています。
+例えば、出納表一覧(SuitohListView)は
+path('Suitoh_list/', views.SuitohListView.as_view(), name='Suitoh_list')
+と定義されており、
+/kakeibo_tuto/Suitoh_listでアクセスできます。
+
+各機能に対応するページはファイル内/templates/kakeibo_tuto内にあります。
+いずれもbase.htmlをテンプレートとして利用しており、bootstrap4によって作成されています。
+
+例えば/Suitoh_listにアクセスするとSuitoh_list.htmlが表示されるとともに
+/views.py内で定義されたSuitohListViewが呼び出されます。
+
+
+殆どの機能はDjango汎用ビューにを使っています。
+機能名（views.関数/class名,templates/kakeibo_tuto/htmlファイル）
+開発用県内の最低要件に関する機能
+すべてmodels.Suitohモデルを利用します
+出納表一覧(SuitohListView,Suitoh_list.html)
+ページ内path:/Suitoh_list
+
+汎用ビューであるListViewを利用しています。
+db.sqlite3内に登録されているデータを一覧表示します。
+Suitoh_list.html内の
+<div class="card mb-3"> </div>
+で定義されており、カラム名のあとに表がのります。
+{% for item in object_list %}によって、すべてのデータを一行ずつ表示しています。
+更新・削除ボタンを各行ごとにもちます。
+
+新規登録(SuitohCreateView,Suitoh_form.html)
+ページ内path:/Suitoh_create
+Suitoh_list.html内の追加ボタンからアクセスできます。
+汎用ビューであるCreateViewをりようしています。
+html内の{{ form|bootstrap }}がメインフォームです、データテーブルに対応した項目を入力できます。
+|bootstrapによってスタイルを調整しています。
+
+登録完了後のurlはviews.SuitohCreateView内の
+success_url = reverse_lazy('kakeibo_tuto:create_done')
+によって定義されており
+create_done.htmlを呼び出します。
+
+更新・更新完了(SuitohUpdateView,update_done)
+ページ内path:/update/<pk>
+Suitoh_list.html内の更新ボタンからアクセスできます。
+汎用ビューであるUpdateViewをりようしています。
+新規登録と同じSuitoh_formを利用します。
+更新ボタンが押されると対応するデータのプライマリキーPKが渡され、Suitoh_formに反映されます。
+
+更新完了後のurlはviews.SuitohCreateView内の
+success_url = reverse_lazy('kakeibo_tuto:create_done')
+によって定義されており
+create_done.htmlを呼び出します。
+
+削除・削除完了(SuitohDeleteView.delete_done)
+ページ内path:/update/<pk>
+Suitoh_list.html内の更新ボタンからアクセスできます。
+汎用ビューであるUpdateViewをりようしています。
+新規登録と同じSuitoh_formを利用します。
+更新ボタンが押されると対応するデータのプライマリキーPKが渡され、Suitoh_formに反映されます。
+
+更新完了後のurlはviews.SuitohCreateView内の
+success_url = reverse_lazy('kakeibo_tuto:create_done')
+によって定義されており
+create_done.htmlを呼び出します。
+
+
+</body>
+</html>
