@@ -1,0 +1,24 @@
+{% extends 'kakeibo_tuto/base.html' %}
+{% block content %}
+
+ <div class="content-wrapper">
+   <div class="container-fluid">
+     <!-- Breadcrumbs-->
+     <ol class="breadcrumb">
+       <li class="breadcrumb-item">
+         <a href="{% url 'kakeibo_tuto:Suitoh_list' %}">TOP</a>
+       </li>
+       <li class="breadcrumb-item active">ねこ</li>
+     </ol>
+     <!-- Example DataTables Card-->
+     <div class="card mb-3">
+       <div class="card-header">
+         <i class="fa fa-server"></i> <b>今日の猫</b></div>
+       <div class="card-body">
+         <img src='{{cat}}'　 class="img-fluid">
+         <div class="alert alert-info" role="alert">{{cat}}</div>
+         <div class="alert alert-info" role="alert">Google画像検索結果からurlをスクレイピングしています。
+         <t>連続でのリロードはしないでください</t>
+         </div>
+
+{% endblock content %}

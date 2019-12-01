@@ -13,6 +13,7 @@ urlpatterns = [
     path('update_done/', views.update_done, name='update_done'),
     path('delete/<int:pk>/', views.SuitohDeleteView.as_view(), name='Suitoh_delete'),
     path('delete_done/', views.delete_done, name='delete_done'),
-    path('Sumbycat/',views.Sumbycat,name='Sumbycat')
+    path('Sumbycat/',views.Sumbycat,name='Sumbycat'),
+    path('randcat/',views.randcat, name="randcat"),
 
     ]

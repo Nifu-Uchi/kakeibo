@@ -4,6 +4,14 @@ from .models import Category, Ranks, Suitoh
 from django.db import models
 from .forms import SuitohForm
 from django.urls import reverse_lazy
+import requests
+from bs4 import BeautifulSoup as bs
+import os
+from urllib import request as req
+from urllib import error
+from urllib import parse
+import bs4
+import random
 
 
 class SuitohListView(ListView):
@@ -57,6 +65,31 @@ def Sumbycat(request):
     #context = {'dict': sumbycats, 'lists': ['a', 'b', 'c', 'd']}
     return render(request, 'kakeibo_tuto/Sumbycat.html', con)
 
+def randcat(request):
+    keyword = '猫かわいい'
+
+    urlKeyword = parse.quote(keyword)
+    url = 'https://www.google.com/search?hl=jp&q=' + urlKeyword + '&btnG=Google+Search&tbs=0&safe=off&tbm=isch'
+
+    headers = {"User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:47.0) Gecko/20100101 Firefox/47.0", }
+    requesta = req.Request(url=url, headers=headers)
+    page = req.urlopen(requesta)
+
+    html = page.read().decode('utf-8')
+    html = bs4.BeautifulSoup(html, "html.parser")
+    elems = html.select('.rg_meta.notranslate')
+    counter = 0
+    cats = []
+    for ele in elems:
+        ele = ele.contents[0].replace('"', '').split(',')
+        eledict = dict()
+        for e in ele:
+            num = e.find(':')
+            eledict[e[0:num]] = e[num + 1:]
+        catU = eledict['ou']
+        cats.append(catU)
+    i = random.randrange(len(cats)-1)
+    return render(request, 'kakeibo_tuto/randcat.html', {'cat':cats[i]})
 
 def test3(request):
     return render(request, 'kakeibo_tuto/Suitoh_list.html', {'hel': 'hev', })
