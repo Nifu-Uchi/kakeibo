@@ -15,5 +15,5 @@ urlpatterns = [
     path('delete_done/', views.delete_done, name='delete_done'),
     path('Sumbycat/',views.Sumbycat,name='Sumbycat'),
     path('randcat/',views.randcat, name="randcat"),
-
+    path('calen/',views.calview, name="calen"),
     ]

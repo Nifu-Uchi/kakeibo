@@ -34,6 +34,10 @@ def test(goma):
     return str(param["hello"]) + goma
 
 
+def calview(request):
+
+    return render(request, 'kakeibo_tuto/calen.html', {'cat':'日別支出'})
+
 def Sumbycat(request):
     s_data =Suitoh.objects.all()
     total = 0
@@ -57,17 +61,13 @@ def Sumbycat(request):
             dict[item] = a
 
 
-    # context = {'dict':sumbycats}
-    a= {"aa":"aaa","xx":'xxxx'}
-    b = {"aa":"bbb","xx":'xxxx'}
-    #con = {"dict":{'a':a,'b':b}}
+
     con = {'dict': dict}
-    #context = {'dict': sumbycats, 'lists': ['a', 'b', 'c', 'd']}
+
     return render(request, 'kakeibo_tuto/Sumbycat.html', con)
 
 def randcat(request):
     keyword = '猫かわいい'
-
     urlKeyword = parse.quote(keyword)
     url = 'https://www.google.com/search?hl=jp&q=' + urlKeyword + '&btnG=Google+Search&tbs=0&safe=off&tbm=isch'
 
@@ -89,10 +89,11 @@ def randcat(request):
         catU = eledict['ou']
         cats.append(catU)
     i = random.randrange(len(cats)-1)
-    return render(request, 'kakeibo_tuto/randcat.html', {'cat':cats[i]})
+    return render(request, 'kakeibo_tuto/randcat.html', {'cat':cats[i],'keyword':keyword})
 
 def test3(request):
     return render(request, 'kakeibo_tuto/Suitoh_list.html', {'hel': 'hev', })
+
 
 
 class SuitohCreateView(CreateView):
