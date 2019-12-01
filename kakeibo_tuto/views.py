@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from .models import Category,Ranks,Suitoh
+from django.db import models
 from . forms import SuitohForm
 from django.urls import reverse_lazy
 
@@ -18,11 +19,23 @@ class SuitohListView(ListView):
         context["foo"] = test('a')
         return context
 def test(goma):
-    param = {'object_list':Suitoh.objects.all(),
-             'hello':'django',}
+    param = {"hello":"help"}
     return (str(param["hello"])+goma)
 
+def Sumbycat(request):
+    category_list = []
+    # 全カテゴリ名をテーブルから取得する。
+    category_data = Category.objects.all()
+    # ループ処理でカテゴリ名のリストを作成する。
+    for item in category_data:
+        category_list.append(item.category_name)
 
+    # つづいてカテゴリ毎の合計金額を求める
+    for i, item in enumerate(category_list):
+        category_total = \
+        Suitoh.objects.filter(cat__category_name=category_list[i])
+            .aggregate(sum=models.Sum('out_cost'))['sum']
+    return render(request,'kakeibo_tuto/Sumbycat.html',{"cat":'dog'})
 
 
 def test3(request):
