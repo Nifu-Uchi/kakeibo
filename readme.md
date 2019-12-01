@@ -31,10 +31,14 @@ kakeibo/kakeibo_tutoにアプリケーション構成ファイルがあります
 
 日付,カテゴリ,金額,名目,重要度  
 
+<font color="Black">
+
 > ＊cat,rankはそれぞれ`models.Ranks(高/中/低)`,`models.Category`で定義されています。  
 > 
 > メインページ（/kakeibo_tuto/Suitoh_list/）に(views.SuitohListView)一覧表示されるようなっており、Listviewによって表示されています。  
 > データフレームで定義された5カラムの他に、修正・削除ボタン(後述)が実装されています。 
+
+</font>
 
 ### 機能一覧
 
