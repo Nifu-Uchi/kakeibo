@@ -12,11 +12,21 @@ class SuitohListView(ListView):
     '''全取得'''
     def queryset(self):
         return Suitoh.objects.all()
-def test(request):
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs) # はじめに継承元のメソッドを呼び出す
+        context["foo"] = test('a')
+        return context
+def test(goma):
     param = {'object_list':Suitoh.objects.all(),
              'hello':'django',}
-    return render(request,'kakeibo_tuto/Suitoh_list.html',param)
+    return (str(param["hello"])+goma)
 
+
+
+
+def test3(request):
+        return render(request,'kakeibo_tuto/Suitoh_list.html',{'hel':'hev',})
 
 class SuitohCreateView(CreateView):
 

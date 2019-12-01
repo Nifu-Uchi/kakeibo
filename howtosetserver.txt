@@ -8,3 +8,4 @@ git reset --hard origin/master
 18.191.24.11
 
 python3 manage.py runserver 0.0.0.0:8000
+<td>2019-11-29</td>
