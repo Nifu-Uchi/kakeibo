@@ -8,7 +8,7 @@
        <li class="breadcrumb-item">
          <a href="{% url 'kakeibo_tuto:Suitoh_list' %}">TOP</a>
        </li>
-       <li class="breadcrumb-item active">種類ごとの合計</li>
+       <li class="breadcrumb-item active">種類別種類合計</li>
      </ol>
      <!-- Example DataTables Card-->
      <div class="card mb-3">
@@ -46,6 +46,60 @@
 
        </div>
       </div>
+
+
+         <!-- 円グラフの描画-->
+         <div class="chart_container">
+             <canvas id='CircleChart' style="position: relative; height:1vh; width:1vw"></canvas>
+           </div>
+       </div>
+      </div>
+     <div class="card mb-3">
+       <div class="card-header">
+         <i class="fa fa-server"></i> <b>月別支出合計</b></div>
+       <div class="card-body">
+         <div class="card-body">
+
+         <div class="table-responsive">
+         <table id=list width="100%" class="table table-striped table-bordered">
+
+             <thead>
+               <tr>
+                 <th class="text-center">年/月</th>
+                 <th class="text-center">金額</th>
+
+               </tr>
+             </thead>
+
+             <tbody>
+               {% for key,value in sbm.items %}
+                 <tr class="odd gradeX text-center">
+                   <td class="text-center" width="100">{{key}}</td>
+                   <td class="text-center" width="100">{{value.total}}</td>
+
+
+                 </tr>
+             {% endfor %}
+             </tbody>
+           　<!-- ここまでが表のデータ部分の表示-->
+           </table>
+           <!-- ここまでがテーブル表の定義 -->
+
+       </div>
+
+
+       </div>
+      </div>
+   </div>
+     </div>
+   <style>
+      .chart_container {
+          width: 640px;
+          margin: auto;
+        }
+  </style>
+
+
 
 
 

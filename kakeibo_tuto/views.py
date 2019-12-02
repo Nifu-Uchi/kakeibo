@@ -4,15 +4,14 @@ from .models import Category, Ranks, Suitoh
 from django.db import models
 from .forms import SuitohForm
 from django.urls import reverse_lazy
-import requests
-from bs4 import BeautifulSoup as bs
-import os
+
 from urllib import request as req
-from urllib import error
+
 from urllib import parse
 import bs4
 import random
-
+import calendar
+from django.db.models import Sum
 
 class SuitohListView(ListView):
     model = Suitoh
@@ -60,9 +59,28 @@ def Sumbycat(request):
             a = {'total': 0, 'ratio': 0}
             dict[item] = a
 
+    #dict_s = sorted(dict.items().total, key=lambda x: x[1])
+    ##月ごとの集計
+    date_list = []
+    for i in s_data:
+        date_list.append((i.data.strftime('%Y/%m/%d')[:7]))
 
 
-    con = {'dict': dict}
+    date_list_s = list(set(date_list))
+    date_list_s.sort(reverse=False)
+
+    monthly_sum = []
+    sumbymonth ={}
+    for i in date_list_s:
+        y,m = i.split("/")
+        month_range = calendar.monthrange(int(y), int(m))[1]
+        first_date = y + '-' + m +'-' + '01'
+        last_date = y + '-' + m + '-' + str(month_range)
+        total_of_month = Suitoh.objects.filter(data__range=(first_date, last_date)).aggregate(sum=models.Sum('out_cost'))['sum']
+        sumbym ={'y':y,'m':m,'total':total_of_month}
+        sumbymonth[i] = sumbym
+
+    con = {'dict': dict,'sbm':sumbymonth}
 
     return render(request, 'kakeibo_tuto/Sumbycat.html', con)
 
