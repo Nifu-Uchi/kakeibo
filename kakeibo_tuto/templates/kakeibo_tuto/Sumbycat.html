@@ -8,7 +8,7 @@
        <li class="breadcrumb-item">
          <a href="{% url 'kakeibo_tuto:Suitoh_list' %}">TOP</a>
        </li>
-       <li class="breadcrumb-item active">種類別種類合計</li>
+       <li class="breadcrumb-item active">支出分析</li>
      </ol>
      <!-- Example DataTables Card-->
      <div class="card mb-3">
@@ -84,6 +84,10 @@
            　<!-- ここまでが表のデータ部分の表示-->
            </table>
            <!-- ここまでがテーブル表の定義 -->
+
+         <div class="chart_container">
+             <canvas id='LineChart' style="position: relative; height:25vh; width:25vw"></canvas>
+           </div>
 
        </div>
 

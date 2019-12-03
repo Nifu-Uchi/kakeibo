@@ -15,10 +15,22 @@
        <div class="card-header">
          <i class="fa fa-server"></i> <b>今日の猫</b></div>
        <div class="card-body">
+         <div class="alert alert-success" role="alert">↓リロードするたびに違う猫が出ます。（画像が表示されない場合もリロードしてください）
+         </div>
+         <td class="text-center" width="140"><a class="btn btn-info"
+                        href="{% url 'kakeibo_tuto:randcat' %}">リロード</a></td>
+
          <img src='{{cat}}'　 class="img-fluid">
          <div class="alert alert-info" role="alert">{{cat}}</div>
+         <tr class="odd gradeX text-center">
+
+         <td class="text-center" width="140"><a class="btn btn-success"
+                        href="{% url 'kakeibo_tuto:Suitoh_list' %}">仕事に戻る</a></td>
+         </tr>
          <div class="alert alert-info" role="alert">Google画像検索結果からurlをスクレイピングしています。
          <t>連続でのリロードはしないでください</t>
+         </div>
+         <div class="alert alert-info" role="alert">このページもレスポンシブデザインに対応しています。適切な大きさに変えてください
          </div>
 
 {% endblock content %}

@@ -52,8 +52,36 @@
            ] }
          });
    </script>
+<script>
+  var ctx = document.getElementById("LineChart").getContext('2d');
+  var DiskChart = new Chart(ctx, {
+  type: 'line',
+    data: {
+      labels: [
+      {% for key ,value in sbm.items %}
+        '{{key}}',
+      {% endfor %}
+      ],
+      datasets: [
+      {
+        label: "月ごと合計",
+        fill: false,
+        borderColor: 'rgb(254,97,132,0.8)',
+        backgroundColor : 'rgb(254,97,132,0.5)',
+        data: [
+      {% for key ,value in sbm.items %}
+        '{{value.total}}',
+      {% endfor %}
+        ],
+      }
+
+    ]
+  },
+});
+</script>
 
 
+<!-- Suitoh_listのオプション-->
  <script>
     jQuery(function($){
       $.extend( $.fn.dataTable.defaults, {

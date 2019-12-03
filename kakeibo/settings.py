@@ -26,7 +26,7 @@ SECRET_KEY = ')1zap@68!3)t9cf%xe#5uw0=1k189-2e9ez2#yd$tnhkc2w=7g'
 DEBUG = False
 
 
-ALLOWED_HOSTS = ['18.191.24.11','127.0.0.1']
+ALLOWED_HOSTS = ['18.191.24.11', '127.0.0.1']
 LOGIN_REDIRECT_URL = '/kakeibo_tuto/Suitoh_list'
 # Application definition
 
